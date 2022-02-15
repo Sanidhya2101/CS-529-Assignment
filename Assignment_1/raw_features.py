@@ -9,10 +9,15 @@ def create_dataframe(filename):
 
 
 
-def gettfidf(train_df,test_df):
+def gettfidf(train_df,test_df,file_name):
 
-    body_text_vectorizer = TfidfVectorizer(ngram_range=(1, 2), lowercase=True, stop_words='english')
-    headline_vectorizer = TfidfVectorizer(ngram_range=(1, 2), lowercase=True, stop_words='english')
+    if file_name == 'nela':
+        body_text_vectorizer = TfidfVectorizer(ngram_range=(1, 2), lowercase=True, stop_words='english',max_features=25000)
+        headline_vectorizer = TfidfVectorizer(ngram_range=(1, 2), lowercase=True, stop_words='english',max_features=25000)
+
+    else:
+        body_text_vectorizer = TfidfVectorizer(ngram_range=(1, 2), lowercase=True, stop_words='english')
+        headline_vectorizer = TfidfVectorizer(ngram_range=(1, 2), lowercase=True, stop_words='english')
 
     train_body_tfidf = body_text_vectorizer.fit_transform(train_df['articleBody'])
     train_headline_tfidf = headline_vectorizer.fit_transform(train_df['Headline'])
